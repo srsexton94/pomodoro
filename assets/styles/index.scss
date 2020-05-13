@@ -1,1 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
+
+body {
+  background: radial-gradient(ellipse at center,
+  rgba(179, 255, 252, 0),
+  rgba(179, 255, 252, 0.10),
+  rgba(179, 255, 252, 0.28),
+  rgba(179, 255, 252, 0.44),
+  rgba(179, 255, 252, 0.68),
+  rgba(179, 255, 252, 1));
+}
+
+.clock {
+  border: 1px solid black;
+  margin: 30vh auto;
+  padding: 10vh;
+  text-align: center;
+  width: 90vw;
+
+  .timer {
+    font-size: 20vw;
+  }
+}
+
+.hidden {
+  display: none;
+}
