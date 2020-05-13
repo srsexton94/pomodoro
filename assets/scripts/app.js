@@ -4,6 +4,10 @@
 let minInterval
 let secInterval
 
+const breakSession = () => {
+  console.log('on break!')
+}
+
 const minTimer = () => {
   const min = parseInt($('.minutes').text())
   $('.minutes').text(min - 1)
@@ -11,10 +15,21 @@ const minTimer = () => {
 
 const secTimer = () => {
   let sec = parseInt($('.seconds').text())
-  if (sec === 0) {
+  const min = parseInt($('.minutes').text())
+  if (min === 25) {
+    $('.minutes').text('24')
+  }
+  if (sec === 0 && min === 0) {
+    breakSession()
+    return
+  } else if (sec === 0) {
     sec = 60
   }
-  $('.seconds').text(sec - 1)
+  let newSec = `${sec - 1}`
+  if (newSec.length === 1) {
+    newSec = `0${newSec}`
+  }
+  $('.seconds').text(newSec)
 }
 
 const startPauseInterval = (bool) => {
