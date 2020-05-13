@@ -1,10 +1,11 @@
 'use strict'
 
-// const bell = new Audio('./public/bell.mp3')
+const bell = new Audio('./public/bell.mp3')
 let minInterval
 let secInterval
 
 const breakSession = () => {
+  bell.play()
   console.log('on break!')
 }
 
@@ -20,6 +21,7 @@ const secTimer = () => {
     $('.minutes').text('24')
   }
   if (sec === 0 && min === 0) {
+    startPauseInterval(false)
     breakSession()
     return
   } else if (sec === 0) {
