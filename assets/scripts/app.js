@@ -1,17 +1,31 @@
 'use strict'
 
 const bell = new Audio('./public/bell.mp3')
+const store = require('./store')
 let minInterval
 let secInterval
 
 const breakSession = () => {
   bell.play()
-  console.log('on break!')
+  store.onbreak = true
+  $('.minutes').text('5')
+  $('.seconds').text('00')
+  startPauseInterval(true)
 }
 
 const minTimer = () => {
   const min = parseInt($('.minutes').text())
   $('.minutes').text(min - 1)
+}
+
+const hitZero = () => {
+  startPauseInterval(false)
+  if (store.onbreak) {
+    store.onbreak = false
+    reset()
+  } else {
+    breakSession()
+  }
 }
 
 const secTimer = () => {
@@ -20,9 +34,11 @@ const secTimer = () => {
   if (min === 25) {
     $('.minutes').text('24')
   }
+  if (min === 5 && store.onbreak) {
+    $('.minutes').text('4')
+  }
   if (sec === 0 && min === 0) {
-    startPauseInterval(false)
-    breakSession()
+    hitZero()
     return
   } else if (sec === 0) {
     sec = 60
@@ -45,9 +61,12 @@ const startPauseInterval = (bool) => {
   }
 }
 
-const onReset = event => {
+const reset = event => {
   startPauseInterval(false)
   $('.minutes').text('25')
+  if (store.onbreak) {
+    $('.minutes').text('5')
+  }
   $('.seconds').text('00')
 }
 
@@ -60,5 +79,5 @@ $(() => {
     event.preventDefault()
     startPauseInterval(false)
   })
-  $('#reset').on('click', onReset)
+  $('#reset').on('click', reset)
 })
