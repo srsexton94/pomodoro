@@ -8,17 +8,16 @@ body {
   rgba(179, 255, 252, 0.44),
   rgba(179, 255, 252, 0.68),
   rgba(179, 255, 252, 1));
+  overflow: hidden;
 }
 
 .clock {
-  border: 1px solid black;
-  margin: 30vh auto;
-  padding: 10vh;
+  margin: 20vh auto;
   text-align: center;
   width: 90vw;
 
   .timer {
-    font-size: 20vw;
+    font-size: 15vw;
   }
 }
 

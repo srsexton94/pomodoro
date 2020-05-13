@@ -51,7 +51,6 @@ const secTimer = () => {
 }
 
 const startPauseInterval = (bool) => {
-  $('.start-pause').toggleClass('hidden')
   if (bool) {
     minInterval = setInterval(minTimer, 60000)
     secInterval = setInterval(secTimer, 1000)
@@ -63,6 +62,8 @@ const startPauseInterval = (bool) => {
 
 const reset = event => {
   startPauseInterval(false)
+  $('#start').removeClass('hidden')
+  $('#pause').addClass('hidden')
   $('.minutes').text('25')
   if (store.onbreak) {
     $('.minutes').text('5')
@@ -71,6 +72,9 @@ const reset = event => {
 }
 
 $(() => {
+  $('.start-pause').on('click', () => {
+    $('.start-pause').toggleClass('hidden')
+  })
   $('#start').on('click', event => {
     event.preventDefault()
     startPauseInterval(true)
