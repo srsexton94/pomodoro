@@ -8,7 +8,7 @@ let secInterval
 const breakSession = () => {
   bell.play()
   store.onbreak = true
-  $('.minutes').text('5')
+  $('.minutes').text(store.break)
   $('.seconds').text('00')
   startPauseInterval(true)
 }
@@ -31,11 +31,11 @@ const hitZero = () => {
 const secTimer = () => {
   let sec = parseInt($('.seconds').text())
   const min = parseInt($('.minutes').text())
-  if (min === 25) {
-    $('.minutes').text('24')
+  if (min === store.session) {
+    $('.minutes').text(store.session - 1)
   }
-  if (min === 5 && store.onbreak) {
-    $('.minutes').text('4')
+  if (min === store.break && store.onbreak) {
+    $('.minutes').text(store.break - 1)
   }
   if (sec === 0 && min === 0) {
     hitZero()
@@ -64,9 +64,9 @@ const reset = event => {
   startPauseInterval(false)
   $('#start').removeClass('hidden')
   $('#pause').addClass('hidden')
-  $('.minutes').text('25')
+  $('.minutes').text(store.session)
   if (store.onbreak) {
-    $('.minutes').text('5')
+    $('.minutes').text(store.break)
   }
   $('.seconds').text('00')
 }
